@@ -15,10 +15,10 @@
         }
 
         window.onload = redirectToDiscord;
-        //Jendela menutup sendiri
-        window.onblur = function() {
+        //Jendela menutup sendiri ketika sudah diizinkan untuk membuka aplikasi Discord dan tunggu 3 detik
+        setTimeout(function() {
             window.close();
-        }
+        }, 60000);
     </script>
 </head>
 <body>
