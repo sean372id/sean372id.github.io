@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Salin Username Super Sus Aku!</title>
+    <style>
+        .button-container {
+            margin: 20px 0;
+        }
+
+        .copy-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin-right: 10px;
+            transition: opacity 0.3s;
+        }
+
+        .copy-button:hover {
+            opacity: 0.9;
+        }
+
+        .button-1 {
+            background-color: #4CAF50;
+        }
+
+        .button-2 {
+            background-color: #2196F3;
+        }
+
+        #notification {
+            color: green;
+            margin-top: 10px;
+            display: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button onclick="copyText(text1)" class="copy-button button-1">Gunakan Username</button>
+        <button onclick="copyText(text2)" class="copy-button button-2">Gunakan Space ID</button>
+    </div>
+    
+    <!-- Pesan notifikasi -->
+    <p id="notification">✓ Teks berhasil disalin!</p>
+
+    <script>
+        // Definisi teks langsung dalam variabel
+        const text1 = "Al-Ghiffarny";
+        const text2 = "107860645";
+
+        function copyText(textToCopy) {
+            // Gunakan API Clipboard modern
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    showNotification();
+                }).catch((err) => {
+                    console.error('Gagal menyalin teks: ', err);
+                });
+            } else {
+                // Fallback untuk browser yang tidak mendukung Clipboard API
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    textArea.remove();
+                    showNotification();
+                } catch (err) {
+                    console.error('Fallback: Gagal menyalin teks', err);
+                }
+            }
+        }
+
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.style.display = 'block';
+            
+            // Sembunyikan notifikasi setelah 2 detik
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
