@@ -16,9 +16,9 @@
 
         window.onload = redirectToDiscord;
         //Jendela menutup sendiri
-        setTimeout(function() {
+        window.onblur = function() {
             window.close();
-        }, 1000);
+        }
     </script>
 </head>
 <body>
