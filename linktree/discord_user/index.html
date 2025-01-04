@@ -8,7 +8,7 @@
         function redirectToDiscord() {
             var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
             if (isMobile) {
-                window.location.href = "https://discord.com/users/867270667539447829";
+                window.open("https://discord.com/users/867270667539447829", "_blank");
             } else {
                 window.location.href = "discord://discord.com/users/867270667539447829";
             }
