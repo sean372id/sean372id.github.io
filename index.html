@@ -1,138 +1,223 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Sean372_ID</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Sean Al-Ghiffarny &gt;&gt; Home Page</title>
 </head>
 <body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
+    <nav>
         <div class="container">
             <div class="line"></div>
-            <a href="#" class="navbar-brand">SEAN AL-GHIFFARNY</a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navmenu">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">HOME</a></li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">PROJECTS</a></li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">POSTS</a></li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">CONTACTS</a></li>
+            <div class="wrapper">
+                <div class="logo">SEAN AL-GHIFFARNY</div>
+            <div class="menu">
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#gallery">GALLERY</a></li>
+                    <li><a href="#projects">PROJECTS</a></li>
+                    <li><a href="#posts">POSTS</a></li>
+                    <li><a href="#contacts">CONTACTS</a></li>
                 </ul>
             </div>
-        </div>
+            </div>
     </nav>
-    <main class="overflow-hidden">
-        <div class="vw-100 vh-100 intro position-relative">
-            <div class="container position-absolute top-50 m3">
-                <div class="capsule-line"></div>
-                <h1 class="maintitle montserrat-title gray">Sean Al-Ghiffarny.</h1>
-                <p class="mainsubtitle gray">Ini adalah website asli dari Sean372_ID</p>
+    <section class="welcome">
+        <img src="assets/RE4wE9a.jpg" alt="" class="bg-animate">
+        <h1 class="bigtitle">Sean<br>Al-Ghiffarny.</h1>
+        <h3 class="bigsubtitle">Kreator Digital & Estetika Internet</h3>
+    </section>
+    <section class="about">
+        </div>
+        <div class="container">
+            <div class="text-wrapper">
+                <h1 class="title">About Me</h1>
+                <hr>
+                <p>Seorang pemuda yang memiliki <span class="bold">passion</span> dalam bidang digital. Ia merupakan penggiat multimedia, terutama di sekolahnya. Mau dia fotografi, videografi, pengeditan konten, desain grafis dan grafik. Ia saat ini sedang memainkan beberapa game: Minecraft, Roblox, dan Super Sus. Selain itu, ia seringkali menggambar, ataupun menulis cerita. </p>
+                <button onclick="alert('Coming Soon Gess! Nanti Yaa! 😁')">Pelajari Selengkapnya</button>
+            </div>
+            <img src="assets/profile.png" alt="About Image" class="about-image">
+        </div>
+    </section>
+    <section class="pages">
+        <div class="container">
+            <a href="#" class="pages-link">HOMEPAGE</a>
+            <a href="#gallery" class="pages-link">GALLERY</a>
+            <a href="#projects" class="pages-link">PROJECTS</a>
+            <a href="#posts" class="pages-link">POSTS</a>
+            <a href="#contacts" class="pages-link">CONTACTS</a>
+        </div>
+    </section>
+    <section class="gallerys">
+        <h1 class="title middle-title" id="gallery">Our Gallery</h1>
+        <div class="container">
+            <div class="gallerys-grid">
+                <div class="gallery-card">
+                    <img class="gallery-picture" src="assets/DSC09257.JPG">
+                    <h2 class="title">Photography Side</h2>
+                    <p class="description">Ketika fotografer cari suasana.</p>
+                </div>
+                <div class="gallery-card">
+                    <img class="gallery-picture" src="assets/DSC09690.JPG">
+                    <h2 class="title">Liminal Spaces</h2>
+                    <p class="description">Sebuah ruang penuh kekosongan</p>
+                </div>
+                <div class="gallery-card">
+                    <img class="gallery-picture" src="assets/IMG20250713193054.png">
+                    <h2 class="title">Photo Doodle</h2>
+                    <p class="description">'Merusak Estetika!'</p>
+                </div>
+                <div class="gallery-card">
+                    <img class="gallery-picture" src="assets/IMG20250713193042.png">
+                    <h2 class="title">Fan Arts</h2>
+                    <p class="description">Gambar-gambar fanart ada di sini!</p>
+                </div>
+                <div class="gallery-card">
+                    <img class="gallery-picture" src="https://placehold.co/300x400">
+                    <h2 class="title">gallery 2</h2>
+                    <p class="description">Deskripsi 2</p>
+                </div>
+                <div class="gallery-card">
+                    <img class="gallery-picture" src="https://placehold.co/300x400">
+                    <h2 class="title">gallery 2</h2>
+                    <p class="description">Deskripsi 2</p>
+                </div>
+                
             </div>
         </div>
-        <section class="mt-5 container about">
-            <div class="d-flex flex-column flex-md-row align-items-center">
-                <img class="img-fluid d-md-none box hidden animate-right" src="assets/pic/Sean372_ID2.png" alt="Gambar Kura-Kura Minecraft // Sean372_ID">
-                <img class="img-fluid w-50 d-none d-md-block img-about box hidden animate-right" src="assets/pic/Sean372_ID2.png" alt="Gambar Kura-Kura Minecraft // Sean372_ID">
-                <div class="mainabout box hidden animate-left ">
-                    <h1 class="title montserrat-title">Sedikit Tentang...</h1>
-                    <hr>
-                    <p>Dari Jupiter ke Bakauheni. Namaku Sean Al-Ghiffarny...</p>
-                    <p>Menurutku, Nama tersebut aku ambil dari kata &quot;<abbr class="none b" title="Asian South East Asian Nations">ASEAN</abbr>&quot;. Di mana dari kata tersebut dihapuslah huruf "A" tersebut dan kebetulan saja ada nama orang seperti itu. Nah, hal itu karena aku ya tinggalnya di salah satu negara Asia Tenggara. Tentunya di Indonesia, dong. Di samping menjadi kontent kreator, juga menjadi illustrator dan penulis novel. Dan saat ini, pemilik Sean Al-Ghiffarny berstatus pelajar di sebuah pesantren yang <abbr title="Mungkin?" class="none">terkenal</abbr> di Kabupaten Subang. Tepatnya di <abbr title="MENYALA SMAKU!!!!!" class="none b">Jalancagak</abbr>—kalau mau cari, kampusnya yang pertama ya!!!</p>
-                    <button class="btn btn-dark btn-lg">Pelajari Selengkapnya...</button>
-            </div>
-            </div>
-        </section>
-        <section class="mt-5 container projects">
-            <h1 class="title text-center montserrat-title box hidden animate-down">Proyek Kami, W...</h1>
-            <p class="text-center box hidden animate-down">Nih, kalau mau lihat proyek di GitHub kami, bisa cek-cek di sini. Atau cari selengkapnya tuh...</p>
-            <div class="d-flex flex-md-row flex-column box hidden animate-up">
-                <div class="col m-3">
-                    <div class="card posts">
-                        <a href="#projects"><img src="assets/pic/cloudes-11.jpg" alt="" class="card-img-top"></a>
-                        <div class="card-body">
-                            <h5 class="card-title">PROJECT #1</h5>
-                            <p class="card-text">Berisi sesuatu yang bisa saya masukkan tentang proyek kami...</p>
-                        </div>
+    </section>
+    <section class="projects" id="projects">
+        <h1 class="title middle-title">Projects</h1>
+        <div class="container">
+            <div class="project-grid">
+                <div class="project-card">
+                    <img class="project-picture" src="https://placehold.co/300x300">
+                    <div class="text-contents">
+                        <h2 class="title">Project 1</h2>
+                        <p class="description">Deskripsi Project 1</p>
                     </div>
                 </div>
-                <div class="col m-3">
-                    <div class="card posts">
-                        <a href="#projects"><img src="assets/pic/cloudes-11.jpg" alt="" class="card-img-top"></a>
-                            <div class="card-body">
-                            <h5 class="card-title">PROJECT #1</h5>
-                            <p class="card-text">Berisi sesuatu yang bisa saya masukkan tentang proyek kami...</p>
-                        </div>
+                <div class="project-card">
+                    <img class="project-picture" src="https://placehold.co/300x300">
+                    <div class="text-contents">
+                        <h2 class="title">Project 1</h2>
+                        <p class="description">Deskripsi Project 1</p>
                     </div>
                 </div>
-                <div class="col m-3">
-                    <div class="card posts">
-                        <a href="#projects"><img src="assets/pic/cloudes-11.jpg" alt="" class="card-img-top"></a>
-                        <div class="card-body">
-                            <h5 class="card-title">PROJECT #1</h5>
-                            <p class="card-text">Berisi sesuatu yang bisa saya masukkan tentang proyek kami...</p>
-                        </div>
+                <div class="project-card">
+                    <img class="project-picture" src="https://placehold.co/300x300">
+                    <div class="text-contents">
+                        <h2 class="title">Project 1</h2>
+                        <p class="description">Deskripsi Project 1</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img class="project-picture" src="https://placehold.co/300x300">
+                    <div class="text-contents">
+                        <h2 class="title">Project 1</h2>
+                        <p class="description">Deskripsi Project 1</p>
                     </div>
                 </div>
             </div>
-            <a href="#projects" class="none box hidden animate-right">Cari Selengkapnya &gt;&gt;</a>
-        </section>
-        <section class="mt-5 container posts">
-            <h1 class="title montserrat-title text-center box hidden animate-down">Semua Postingan Blog</h1>
-            <blockquote class="box hidden animate-down text-center">Selama saya berada di As-Syifa, atau punya sesuatu yang mau dibagikan, saya sediakan di sini</blockquote>
-            <div class="d-flex flex-md-row flex-column box hidden animate-up">
-                <div class="col m-3">
-                    <div class="card posts">
-                        <a href="#projects"><img src="assets/pic/cloudes.jfif" alt="" class="card-img-top"></a>
-                        <div class="card-body">
-                            <h5 class="card-title">PROJECT #1</h5>
-                            <p class="card-text">Berisi sesuatu yang bisa saya masukkan tentang proyek kami...</p>
-                        </div>
+        </div>
+    </section>
+    <section class="posts" id="posts">
+        <h1 class="title middle-title">Posts</h1>
+        <div class="container">
+            <div class="post-grid">
+                <div class="post-card">
+                    <img src="https://placehold.co/480x270" alt="" class="post-picture">
+                    <div class="text-contents">
+                        <h2 class="title">Post 1</h2>
+                        <p class="description">Deskripsi Post 1</p>
                     </div>
                 </div>
-                <div class="col m-3">
-                    <div class="card posts">
-                        <a href="#projects"><img src="assets/pic/cloudes.jfif" alt="" class="card-img-top"></a>
-                        <div class="card-body">
-                            <h5 class="card-title">PROJECT #1</h5>
-                            <p class="card-text">Berisi sesuatu yang bisa saya masukkan tentang proyek kami...</p>
-                        </div>
+                <div class="post-card">
+                    <img src="https://placehold.co/480x270" alt="" class="post-picture">
+                    <div class="text-contents">
+                        <h2 class="title">Post 1</h2>
+                        <p class="description">Deskripsi Post 1</p>
                     </div>
                 </div>
-                <div class="col m-3">
-                    <div class="card posts">
-                        <a href="#projects"><img src="assets/pic/cloudes.jfif" alt="" class="card-img-top"></a>
-                        <div class="card-body">
-                            <h5 class="card-title">PROJECT #1</h5>
-                            <p class="card-text">Berisi sesuatu yang bisa saya masukkan tentang proyek kami...</p>
-                        </div>
+                <div class="post-card">
+                    <img src="https://placehold.co/480x270" alt="" class="post-picture">
+                    <div class="text-contents">
+                        <h2 class="title">Post 1</h2>
+                        <p class="description">Deskripsi Post 1</p>
+                    </div>
+                </div>
+                <div class="post-card">
+                    <img src="https://placehold.co/480x270" alt="" class="post-picture">
+                    <div class="text-contents">
+                        <h2 class="title">Post 1</h2>
+                        <p class="description">Deskripsi Post 1</p>
+                    </div>
+                </div>
+                <div class="post-card">
+                    <img src="https://placehold.co/480x270" alt="" class="post-picture">
+                    <div class="text-contents">
+                        <h2 class="title">Post 1</h2>
+                        <p class="description">Deskripsi Post 1</p>
+                    </div>
+                </div>
+                <div class="post-card">
+                    <img src="https://placehold.co/480x270" alt="" class="post-picture">
+                    <div class="text-contents">
+                        <h2 class="title">Post 1</h2>
+                        <p class="description">Deskripsi Post 1</p>
+                    </div>
+                </div>
+                <div class="post-card">
+                    <img src="https://placehold.co/480x270" alt="" class="post-picture">
+                    <div class="text-contents">
+                        <h2 class="title">Post 1</h2>
+                        <p class="description">Deskripsi Post 1</p>
+                    </div>
+                </div>
+                <div class="post-card">
+                    <img src="https://placehold.co/480x270" alt="" class="post-picture">
+                    <div class="text-contents">
+                        <h2 class="title">Post 1</h2>
+                        <p class="description">Deskripsi Post 1</p>
                     </div>
                 </div>
             </div>
-            <div class="mt-2">
-                <button class="btn btn-dark box hiden animate-up">Cek yang lainnya, bang!</button>
+        </div> 
+    </section>
+    <section class="contacts" id="contacts">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h1>SEAN <br>AL-GHIFFARNY</h1>
+                    <h3>Kreator digital dan estetika Internet</h3>
+                </div>
+                <div class="contact-card">
+                    <ul class="address">
+                        <li class="links">
+                            <img src="assets/youtube-circle.svg" alt="YT">
+                            <a target="_blank" href="https://youtube.com/@sean372id">Sean372_ID</a>
+                        </li>
+                        <li class="links">
+                            <img src="assets/instagram-circle.svg" alt="IG">
+                            <a target="_blank" href="https://instagram.com/sean372_id">@sean372_id</a>
+                        </li>
+                        <li class="links">
+                            <img src="assets/discord-circle.svg" alt="DSC">
+                            <a target="_blank" href="javascript:copyDscUsername()">@sean372_id</a>
+                        </li>
+                        <li class="links">
+                            <img src="assets/github.svg" alt="GTH">
+                            <a target="_blank" href="https://github.com/sean372id">@sean372_id</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </section>
-        
-    </main>
-    <footer>
-
-    </footer>
-    <script src="assets/script.js"></script>
-    <script src="assets/anim.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        </div>
+    </section>
+    <script src="script.js"></script>
 </body>
 </html>

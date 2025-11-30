@@ -1,0 +1,694 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Fredoka;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 3.5rem;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background-color: #333;
+    margin: 20px 0;
+}
+
+p {
+    font-size: 14pt;
+}
+
+.container {
+    width: 90%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14pt;
+}
+
+span.bold {
+    font-weight: bold;
+}
+
+.middle-title {
+    text-align: center;
+    margin: 60px 0 20px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+
+nav .container {  
+    background-color: #ffffff;
+    position: fixed;
+    width: 100%;
+    max-width: none;
+    padding: 0 25px;
+    padding-top: 25px;
+    z-index: 1000;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav .container .wrapper {
+    padding: 10px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .menu ul{
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+}
+
+nav .menu ul li a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    font-weight: 700;
+}
+
+.logo, .menu {
+    font-weight: bold;
+}
+
+.line {
+    border-bottom: 3px solid #333;
+    width: 1;
+}
+
+.bg-transparent {
+    background-color: transparent !important;
+    color: #ffffff;
+}
+
+.line-transparent {
+    border-color: #ffffff;
+}
+
+section:not(.welcome) {
+    background-color: #ffffff;
+}
+
+section.welcome {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    /* position: absolute; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fef6f3;
+
+}
+
+
+.bg-animate {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    animation: autoScale 10s both;
+    animation-timeline: view();
+    -webkit-animation-timeline: view();
+}
+
+
+.text-wrapper {
+    
+}
+
+.bigtitle {
+    font-size: 19vh;
+    line-height: 15vh;
+    color: #ffffff;
+    animation: titleRising 1s ease-out both;
+    animation-timeline: view();
+    -webkit-animation-timeline: view();
+}
+
+.bigsubtitle {
+    font-size: 5vh;
+    color: #ffffff;
+}
+
+.bigtitle::selection {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+section.about .container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.text-wrapper {
+    flex: 1;
+}
+
+.about-image {
+    width: 50%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+    animation: blurRotateIn 1s ease-out both;
+    animation-timeline: view(80% auto);
+    -webkit-animation-timeline: view(80% auto);
+}
+
+/* --- Scroll Animation --- */
+
+.text-wrapper h1 {
+    animation: textBlurInRight 1s ease-out both;
+    animation-timeline: view(40% auto);
+    -webkit-animation-timeline: view(40% auto);
+}
+
+.text-wrapper p {
+    font-size: 16pt;
+    line-height: 1.6;
+    animation: textBlurInTop 1s ease-out both;
+    animation-timeline: view(80% auto);
+    -webkit-animation-timeline: view(80% auto);
+}
+
+/* Fallback untuk Firefox dan Safari */
+.in-view .text-wrapper h1 {
+    animation: textBlurInRight 1s ease-out both;
+}
+
+.in-view .text-wrapper p {
+    animation: textBlurInTop 1s ease-out both;
+}
+
+
+/* --- Pages Section --- */
+.pages-link {
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    line-height: 23vh;
+    justify-content: center;
+    font-size: 30vh;
+    font-family: Fredoka;
+    animation: autoBlur 1s ease-out both;
+    animation-timeline: view();
+    -webkit-animation-timeline: view();
+}
+
+/* --- Gallery Section --- */
+
+.gallerys-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px
+}
+
+.gallery-card {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: 500ms;
+    cursor: help;
+    transform: rotate(2deg);
+    animation: autoBlurNoScaling 1s ease-out both;
+    animation-timeline: view();
+    -webkit-animation-timeline: view();
+}
+
+.gallery-card img {
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.gallery-card:nth-child(odd) {
+    transform: rotate(-2deg);
+}
+
+.gallery-card:hover {
+    transform: scale(1.10) rotate(5deg);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+.gallery-card:active {
+    animation: fullIntoScreen 0.3s ease-out both;
+}
+
+.gallery-card.title {
+    margin-top: 20px;
+}
+
+/* --- Project Section --- */
+.project-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px
+}
+
+.project-card {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: 500ms;
+    cursor: help;
+    animation: autoBlurNoScaling 1s ease-out both;
+    animation-timeline: view();
+    -webkit-animation-timeline: view();
+}
+
+.project-card img {
+    width: 300px;
+    height: auto;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.project-card:hover {
+    transform: scale(1.10);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+.project-card:active {
+    animation: fullIntoScreen 0.3s ease-out both;
+}
+
+.project-card .text-contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    margin: 20px;
+}
+
+.project-card.title {
+    margin-top: 20px;
+}
+
+/* --- Posts Section --- */
+.post-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px
+}
+
+.post-card {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: 500ms;
+    cursor: pointer;
+    animation: autoBlurNoScaling 1s ease-out both;
+    animation-timeline: view();
+    -webkit-animation-timeline: view();
+}
+
+.post-card img {
+    width: 300px;
+    height: auto;
+    border-radius: 15px;
+}
+
+.post-card:hover {
+    transform: scale(1.10);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+.post-card:active {
+    transform: scale(150%);
+}
+
+.post-card .text-contents {
+    display: inline;
+    text-align: left;
+    margin: 20px;
+}
+
+.post-card .title {
+    font-size: 30px;
+}
+
+/* --- Contacts Section --- */
+
+.contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px
+
+}
+
+.contact-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-card h1 {
+    line-height: 2.5rem;
+}
+
+.address {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.links a {
+    color: inherit;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.links img {
+    width: 35px;
+    height: auto;
+}
+
+/* DEKLARASI ANIMASI */
+
+@keyframes autoScale {
+    0%, 25% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+    }
+}
+
+@keyframes titleRising {
+    0% {
+        transform: translateY(0) scale(50);
+    }
+    50% {
+        transform: translateY(0) scale(100%);
+    }
+    100% {
+        transform: translateY(-100%) scale(140%);
+    }
+}
+
+@keyframes textBlurInRight {
+    0% {
+        filter: blur(8px);
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    100% {
+        filter: blur(0);
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes textBlurInLeft {
+    0% {
+        filter: blur(8px);
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    100% {
+        filter: blur(0);
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+@keyframes textBlurInTop {
+    0% {
+        filter: blur(8px);
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    100% {
+        filter: blur(0);
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes blurRotateIn {
+    0% {
+        filter: blur(8px);
+        opacity: 0;
+        transform: rotate(-30deg) translateX(50%) translateY(50%);
+    }
+    100% {
+        filter: blur(0);
+        opacity: 1;
+        transform: rotate(0deg) translateX(0) translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fullIntoScreen {
+    to {
+        transform: scale(150%);
+    }
+    
+}
+
+@keyframes autoBlur {
+    0% {
+        filter: blur(20px);
+        transform: translateY(70%) scale(1.15);
+    }
+    41%, 59% {
+        filter: blur(0px);
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        filter: blur(20px);
+        transform: translateY(-40%) scale(1.15);
+    }
+
+}
+
+@keyframes autoBlurNoScaling {
+    0% {
+        filter: blur(20px);
+    }
+    41%, 59% {
+        filter: blur(0px);
+    }
+    100% {
+        filter: blur(20px);
+    }
+
+}
+
+/* --- Fallback for JS animation --- */
+.js-timeline .timeline .content {
+    /* Override CSS animation for JS control */
+    animation: none;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.js-timeline .timeline li.is-visible .content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Fallback untuk elemen dengan animation-timeline */
+.js-timeline .bg-animate {
+    animation: autoScale 1s ease-out both;
+}
+
+.js-timeline .bg-animate.is-visible {
+    animation: autoScale 1s ease-out both;
+}
+
+.js-timeline .bigtitle {
+    animation: none;
+    opacity: 0;
+    transform: translateY(0) scale(50);
+}
+
+.js-timeline .bigtitle.is-visible {
+    animation: titleRising 1s ease-out both;
+}
+
+.js-timeline .about-image {
+    animation: none;
+    opacity: 0;
+    filter: blur(8px);
+    transform: rotate(-30deg) translateX(50%) translateY(50%);
+}
+
+.js-timeline .about-image.is-visible {
+    animation: blurRotateIn 1s ease-out both;
+}
+
+.js-timeline .text-wrapper h1 {
+    animation: none;
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateX(-100px);
+}
+
+.js-timeline .text-wrapper h1.is-visible {
+    animation: textBlurInRight 1s ease-out both;
+}
+
+.js-timeline .text-wrapper p {
+    animation: none;
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(100px);
+}
+
+.js-timeline .text-wrapper p.is-visible {
+    animation: textBlurInTop 1s ease-out both;
+}
+
+.js-timeline .pages-link {
+    animation: none;
+    filter: blur(20px);
+    transform: translateY(70%) scale(1.15);
+}
+
+.js-timeline .pages-link.is-visible {
+    animation: autoBlur 1s ease-out both;
+}
+
+.js-timeline .gallery-card {
+    animation: none;
+    filter: blur(20px);
+    transform: translateY(70%) scale(1.15);
+}
+
+.js-timeline .gallery-card.is-visible {
+    animation: autoBlur 1s ease-out both;
+}
+
+.js-timeline .project-card {
+    animation: none;
+    filter: blur(20px);
+    transform: translateY(70%) scale(1.15);
+}
+
+.js-timeline .project-card.is-visible {
+    animation: autoBlur 1s ease-out both;
+}
+
+.js-timeline .post-card {
+    animation: none;
+    filter: blur(20px);
+    transform: translateY(70%) scale(1.15);
+}
+
+.js-timeline .post-card.is-visible {
+    animation: autoBlur 1s ease-out both;
+}
+
+/* --- Responsive Design --- */
+@media screen and (max-width: 768px) {
+    .timeline::before {
+        left: 20px;
+    }
+
+    .timeline li,
+    .timeline li:nth-child(even) {
+        width: 100%;
+        left: 0;
+        padding-left: 50px;
+        padding-right: 15px;
+    }
+
+    .timeline li:nth-child(odd)::after,
+    .timeline li:nth-child(even)::after {
+        left: 20px;
+    }
+
+    section.about .container {
+        flex-direction: column;
+    }
+
+    .about-image {
+        width: 80%;
+        margin-top: 30px;
+    }
+
+    .gallery-card {
+        width: calc(50% - 20px); /* 50% lebar dikurangi setengah dari 20px gap */
+    }
+
+    .gallery-card img {
+        width: 100%;
+    }
+}
