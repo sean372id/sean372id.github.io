@@ -906,8 +906,9 @@ function ensureAudioCtx(){
   const sp=S.audioCtx.createChannelSplitter(2);
   S.analyserL=S.audioCtx.createAnalyser(); S.analyserR=S.audioCtx.createAnalyser();
   [S.analyserL,S.analyserR].forEach(a=>{a.fftSize=2048;a.smoothingTimeConstant=.72;});
-  S.masterGain.connect(sp); sp.connect(S.analyserL,0); sp.connect(S.analyserR,1);
-  S.analyserL.connect(S.audioCtx.destination);
+  S.masterGain.connect(S.audioCtx.destination); // Main output (FIXED)
+  S.masterGain.connect(sp); // Send a copy to the splitter for analysis
+  sp.connect(S.analyserL,0); sp.connect(S.analyserR,1);
   S.monitorDest=S.audioCtx.createMediaStreamDestination();
   S.masterGain.connect(S.monitorDest);
   S.monitorEl=new Audio(); S.monitorEl.srcObject=S.monitorDest.stream;
