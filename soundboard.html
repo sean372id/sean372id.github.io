@@ -425,6 +425,22 @@ main{padding:16px 22px;max-width:1440px;margin:0 auto;}
 .vl-aa-check{width:11px;height:11px;accent-color:var(--teal2);cursor:pointer;}
 .vl-aa-label{font-size:.52rem;color:var(--text3);letter-spacing:.07em;cursor:pointer;}
 
+/* ── SECTION VOLUME ROWS ── */
+.sec-vol-row{display:flex;align-items:center;gap:7px;}
+.sec-vol-label{font-size:.52rem;color:var(--text3);letter-spacing:.1em;white-space:nowrap;text-transform:uppercase;}
+.sec-vol-slider{flex:1;-webkit-appearance:none;appearance:none;height:3px;border-radius:1px;outline:none;cursor:pointer;min-width:60px;}
+.sec-vol-slider.sfx-col{background:var(--border);}
+.sec-vol-slider.sfx-col::-webkit-slider-thumb{-webkit-appearance:none;width:10px;height:10px;border-radius:50%;background:var(--amber2);cursor:pointer;box-shadow:0 0 8px rgba(230,126,34,.5);}
+.sec-vol-slider.music-col{background:var(--border);}
+.sec-vol-slider.music-col::-webkit-slider-thumb{-webkit-appearance:none;width:10px;height:10px;border-radius:50%;background:var(--gold2);cursor:pointer;box-shadow:var(--glow-gold);}
+.sec-vol-slider.vl-col{background:var(--border);}
+.sec-vol-slider.vl-col::-webkit-slider-thumb{-webkit-appearance:none;width:10px;height:10px;border-radius:50%;background:var(--teal2);cursor:pointer;box-shadow:var(--glow-teal);}
+.sec-vol-pct{font-size:.52rem;color:var(--text3);width:30px;text-align:right;}
+
+/* VU master label */
+.vu-master-label{font-size:.48rem;letter-spacing:.18em;color:var(--text3);text-transform:uppercase;margin-bottom:4px;display:flex;align-items:center;gap:6px;}
+.vu-master-label::after{content:'';flex:1;height:1px;background:var(--border);}
+
 /* ── EMPTY ── */
 .empty-state{text-align:center;padding:22px 12px;color:var(--text3);font-size:.62rem;letter-spacing:.1em;border:1px dashed var(--border);border-radius:2px;grid-column:1/-1;}
 .empty-state .es-icon{font-size:1.4rem;margin-bottom:6px;display:block;opacity:.33;}
@@ -524,6 +540,12 @@ main{padding:16px 22px;max-width:1440px;margin:0 auto;}
     <div class="sep"></div>
     <button class="sfx-ctrl-btn stop-btn" id="btnSfxStop">⏹ STOP SEMUA <span class="sc-badge" id="sc-sfxstop" tabindex="0">S</span></button>
     <button class="sfx-ctrl-btn sfade-btn" id="btnSfxFade">↘⏹ FADE-OUT STOP <span class="sc-badge" id="sc-sfxfade" tabindex="0">D</span></button>
+    <div class="sep"></div>
+    <div class="sec-vol-row">
+      <span class="sec-vol-label">SFX VOL</span>
+      <input type="range" class="sec-vol-slider sfx-col" id="sfxVolSlider" min="0" max="1" step="0.01" value="1" style="width:90px;flex:none;">
+      <span class="sec-vol-pct" id="sfxVolDisplay">100%</span>
+    </div>
   </div>
   <div class="sound-grid" id="sfxGrid">
     <div class="empty-state"><span class="es-icon">🔊</span>Pilih folder proyek → muat template, atau tambah file SFX manual</div>
@@ -555,10 +577,11 @@ main{padding:16px 22px;max-width:1440px;margin:0 auto;}
       <div class="fade-bar"><div class="fade-bar-fill" id="fadeBarFill"></div></div>
       <div class="vol-section">
         <div class="vol-row">
-          <div class="vol-label">VOL</div>
+          <div class="vol-label">MUSIK</div>
           <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
           <div class="vol-pct" id="volDisplay">100%</div>
         </div>
+        <div class="vu-master-label">MASTER VU</div>
         <div class="vu-wrap">
           <div class="vu-ch-row"><div class="vu-ch-label">L</div><canvas class="vu-canvas" id="vuL" height="9"></canvas><div class="vu-peak-label" id="peakL">–∞</div></div>
           <div class="vu-ch-row"><div class="vu-ch-label">R</div><canvas class="vu-canvas" id="vuR" height="9"></canvas><div class="vu-peak-label" id="peakR">–∞</div></div>
@@ -638,6 +661,11 @@ main{padding:16px 22px;max-width:1440px;margin:0 auto;}
         <div class="vl-progress-bg" id="vlProgressBg"><div class="vl-progress-fill" id="vlProgressFill"></div></div>
         <div class="vl-progress-time"><span id="vlTimeElapsed">0:00</span><span id="vlTimeDuration">0:00</span></div>
       </div>
+      <div class="sec-vol-row" style="margin-bottom:10px;">
+        <span class="sec-vol-label">VL VOL</span>
+        <input type="range" class="sec-vol-slider vl-col" id="vlVolSlider" min="0" max="1" step="0.01" value="1">
+        <span class="sec-vol-pct" id="vlVolDisplay">100%</span>
+      </div>
       <div class="vl-ctrl-row">
         <button class="vl-ctrl-btn vl-prev-btn" id="btnVlPrev"><div class="vl-ctrl-icon">◀◀</div><div class="vl-ctrl-label">PREV</div><div class="vl-ctrl-sc" id="sc-vlprev" tabindex="0">[</div></button>
         <button class="vl-ctrl-btn vl-play-btn" id="btnVlPlay"><div class="vl-ctrl-icon">▶</div><div class="vl-ctrl-label">PLAY</div><div class="vl-ctrl-sc" id="sc-vlplay" tabindex="0">ENTER</div></button>
@@ -681,6 +709,8 @@ const S = {
   },
 
   audioCtx:null, masterGain:null,
+  sfxGain:null, musicGain:null, vlGain:null,
+  sfxVol:1.0, musicVol:1.0, vlVol:1.0,
   analyserL:null, analyserR:null,
   monitorDest:null, monitorEl:null, monitorActive:false,
   connectedEls: new WeakSet(),
@@ -903,11 +933,20 @@ function ensureAudioCtx(){
   if(S.audioCtx)return;
   const AC=window.AudioContext||window.webkitAudioContext; if(!AC)return;
   S.audioCtx=new AC(); S.masterGain=S.audioCtx.createGain();
+
+  // Per-section gain nodes — each section routes through its own gain → masterGain
+  S.sfxGain  =S.audioCtx.createGain(); S.sfxGain.gain.value  =S.sfxVol;
+  S.musicGain=S.audioCtx.createGain(); S.musicGain.gain.value=S.musicVol;
+  S.vlGain   =S.audioCtx.createGain(); S.vlGain.gain.value   =S.vlVol;
+  S.sfxGain.connect(S.masterGain);
+  S.musicGain.connect(S.masterGain);
+  S.vlGain.connect(S.masterGain);
+
   const sp=S.audioCtx.createChannelSplitter(2);
   S.analyserL=S.audioCtx.createAnalyser(); S.analyserR=S.audioCtx.createAnalyser();
   [S.analyserL,S.analyserR].forEach(a=>{a.fftSize=2048;a.smoothingTimeConstant=.72;});
-  S.masterGain.connect(S.audioCtx.destination); // Main output (FIXED)
-  S.masterGain.connect(sp); // Send a copy to the splitter for analysis
+  S.masterGain.connect(S.audioCtx.destination); // Main output (stereo)
+  S.masterGain.connect(sp); // Copy to splitter for VU analysis
   sp.connect(S.analyserL,0); sp.connect(S.analyserR,1);
   S.monitorDest=S.audioCtx.createMediaStreamDestination();
   S.masterGain.connect(S.monitorDest);
@@ -915,9 +954,14 @@ function ensureAudioCtx(){
   if(S.audioCtx.state==='suspended')S.audioCtx.resume();
   vuLoop();
 }
-function connectToGraph(el){
+function connectToGraph(el, section='music'){
   if(!el||S.connectedEls.has(el))return; ensureAudioCtx(); if(!S.audioCtx)return;
-  try{S.audioCtx.createMediaElementSource(el).connect(S.masterGain);S.connectedEls.add(el);if(S.audioCtx.state==='suspended')S.audioCtx.resume();}
+  try{
+    const target = section==='sfx' ? S.sfxGain : section==='vl' ? S.vlGain : S.musicGain;
+    S.audioCtx.createMediaElementSource(el).connect(target||S.masterGain);
+    S.connectedEls.add(el);
+    if(S.audioCtx.state==='suspended')S.audioCtx.resume();
+  }
   catch(e){console.warn('connect:',e);}
 }
 
@@ -1004,8 +1048,8 @@ function playSfx(id){
   if(t.ls==='error'){showToast('⚠ File tidak ditemukan: '+t.name);return;}
   ensureAudioCtx();
   const audio=new Audio(t.url);
-  audio.volume=parseFloat(document.getElementById('volumeSlider').value);
-  connectToGraph(audio);audio.play().catch(()=>{});
+  audio.volume=1.0;
+  connectToGraph(audio,'sfx');audio.play().catch(()=>{});
   const inst={audio,trackId:id};
   S.activeSfx.push(inst);sfxCountInc(id);
   document.getElementById('sfxDot').className='indicator-dot active';
@@ -1016,7 +1060,27 @@ function sfxCountInc(id){S.sfxCount[id]=(S.sfxCount[id]||0)+1;refreshSfxBtn(id);
 function sfxCountDec(id){S.sfxCount[id]=Math.max(0,(S.sfxCount[id]||0)-1);refreshSfxBtn(id);if(!Object.values(S.sfxCount).some(v=>v>0))document.getElementById('sfxDot').className='indicator-dot';}
 function refreshSfxBtn(id){const b=document.querySelector(`.sfx-btn[data-id="${id}"]`);if(!b)return;const n=S.sfxCount[id]||0;b.classList.toggle('playing',n>0);const pc=b.querySelector('.play-count');if(pc)pc.textContent=`×${n}`;}
 function doSfxStopAll(silent=false){clearInterval(S.sfxFadeIntv);S.sfxFadeIntv=null;const snap=[...S.activeSfx];S.activeSfx.length=0;snap.forEach(inst=>{inst.audio.pause();sfxCountDec(inst.trackId);});Object.keys(S.sfxCount).forEach(k=>{S.sfxCount[k]=0;refreshSfxBtn(parseInt(k));});document.getElementById('sfxDot').className='indicator-dot';if(!silent){flashBtn('btnSfxStop');showToast('⏹ Semua SFX dihentikan');}}
-function doSfxFadeOutStop(){if(!S.activeSfx.length){showToast('⚠ Tidak ada SFX aktif');return;}clearInterval(S.sfxFadeIntv);const fade=parseFloat(document.getElementById('fadeDuration').value),steps=40,intv=(fade*1000)/steps;const snap=S.activeSfx.map(inst=>({inst,sv:inst.audio.volume}));let step=0;S.sfxFadeIntv=setInterval(()=>{step++;const pct=1-step/steps;snap.forEach(({inst,sv})=>{inst.audio.volume=Math.max(0,sv*pct);});if(step>=steps){clearInterval(S.sfxFadeIntv);S.sfxFadeIntv=null;const rem=[...S.activeSfx];S.activeSfx.length=0;rem.forEach(inst=>{inst.audio.pause();sfxCountDec(inst.trackId);});Object.keys(S.sfxCount).forEach(k=>{S.sfxCount[k]=0;refreshSfxBtn(parseInt(k));});document.getElementById('sfxDot').className='indicator-dot';}},intv);flashBtn('btnSfxFade');showToast(`↘ SFX fade-out (${fade}s)...`);}
+function doSfxFadeOutStop(){
+  if(!S.activeSfx.length){showToast('⚠ Tidak ada SFX aktif');return;}
+  clearInterval(S.sfxFadeIntv);
+  const fade=parseFloat(document.getElementById('fadeDuration').value),steps=40,intv=(fade*1000)/steps;
+  const sv=S.sfxGain?S.sfxGain.gain.value:S.sfxVol;
+  let step=0;
+  S.sfxFadeIntv=setInterval(()=>{
+    step++;
+    const val=Math.max(0,sv-step*(sv/steps));
+    if(S.sfxGain) S.sfxGain.gain.value=val;
+    if(step>=steps){
+      clearInterval(S.sfxFadeIntv);S.sfxFadeIntv=null;
+      const rem=[...S.activeSfx];S.activeSfx.length=0;
+      rem.forEach(inst=>{inst.audio.pause();sfxCountDec(inst.trackId);});
+      Object.keys(S.sfxCount).forEach(k=>{S.sfxCount[k]=0;refreshSfxBtn(parseInt(k));});
+      document.getElementById('sfxDot').className='indicator-dot';
+      if(S.sfxGain) S.sfxGain.gain.value=S.sfxVol; // restore
+    }
+  },intv);
+  flashBtn('btnSfxFade');showToast(`↘ SFX fade-out (${fade}s)...`);
+}
 
 // ════════════════════════════════════════════════════════
 //  MUSIC
@@ -1033,8 +1097,9 @@ function selectMusic(id){
   if(t.ls==='error'){showToast('⚠ File tidak ditemukan: '+t.name);return;}
   if(S.selectedMusicId===id)return;
   stopMusicAudio(true);S.selectedMusicId=id;S.musicStatus='stopped';
-  const a=t.audioEl;a.currentTime=0;a.volume=parseFloat(document.getElementById('volumeSlider').value);a.loop=document.getElementById('loopCheck').checked;
-  S.currentAudio=a;connectToGraph(a);
+  const a=t.audioEl;a.currentTime=0;a.volume=1.0;
+  a.loop=document.getElementById('loopCheck').checked;
+  S.currentAudio=a;connectToGraph(a,'music');
   a.ontimeupdate=()=>updateProgress();
   a.onended=()=>{if(!a.loop){S.musicStatus='stopped';updateNowPlaying();updateProgress();}};
   renderMusicGrid();updateNowPlaying();updateProgress();showToast(`✓ Dipilih: ${t.name}`);
@@ -1044,10 +1109,44 @@ function updateNowPlaying(){const t=S.musicTracks.find(x=>x.id===S.selectedMusic
 function updateProgress(){const a=S.currentAudio;if(!a)return;document.getElementById('progressFill').style.width=(a.duration?(a.currentTime/a.duration)*100:0)+'%';document.getElementById('timeElapsed').textContent=fmt(a.currentTime);document.getElementById('timeDuration').textContent=fmt(a.duration);}
 function stopMusicAudio(reset=true){clearMusicFade();if(S.currentAudio){S.currentAudio.pause();if(reset)S.currentAudio.currentTime=0;}}
 function clearMusicFade(){if(S.musicFadeIntv){clearInterval(S.musicFadeIntv);S.musicFadeIntv=null;}const fb=document.getElementById('fadeBarFill');fb.style.width='0%';fb.className='fade-bar-fill';}
-function doPlay(){if(!S.currentAudio){showToast('⚠ Pilih track terlebih dahulu');return;}clearMusicFade();S.currentAudio.volume=parseFloat(document.getElementById('volumeSlider').value);S.currentAudio.play().catch(()=>{});S.musicStatus='playing';updateNowPlaying();flashBtn('btnPlay');}
-function doFadeIn(){if(!S.currentAudio){showToast('⚠ Pilih track terlebih dahulu');return;}clearMusicFade();const a=S.currentAudio,target=parseFloat(document.getElementById('volumeSlider').value),steps=40,intv=(parseFloat(document.getElementById('fadeDuration').value)*1000)/steps;a.volume=0;a.play().catch(()=>{});S.musicStatus='fadein';updateNowPlaying();flashBtn('btnFadeIn');const fb=document.getElementById('fadeBarFill');fb.className='fade-bar-fill fading-in';let step=0;S.musicFadeIntv=setInterval(()=>{step++;a.volume=Math.min(target,step*(target/steps));fb.style.width=((step/steps)*100)+'%';if(step>=steps){clearMusicFade();S.musicStatus='playing';updateNowPlaying();}},intv);}
+function doPlay(){if(!S.currentAudio){showToast('⚠ Pilih track terlebih dahulu');return;}clearMusicFade();S.currentAudio.play().catch(()=>{});S.musicStatus='playing';updateNowPlaying();flashBtn('btnPlay');}
+function doFadeIn(){
+  if(!S.currentAudio){showToast('⚠ Pilih track terlebih dahulu');return;}
+  clearMusicFade();
+  const a=S.currentAudio,target=S.musicVol,steps=40,intv=(parseFloat(document.getElementById('fadeDuration').value)*1000)/steps;
+  if(S.musicGain) S.musicGain.gain.value=0;
+  a.play().catch(()=>{});
+  S.musicStatus='fadein';updateNowPlaying();flashBtn('btnFadeIn');
+  const fb=document.getElementById('fadeBarFill');fb.className='fade-bar-fill fading-in';
+  let step=0;
+  S.musicFadeIntv=setInterval(()=>{
+    step++;
+    const val=Math.min(target,step*(target/steps));
+    if(S.musicGain) S.musicGain.gain.value=val;
+    fb.style.width=((step/steps)*100)+'%';
+    if(step>=steps){clearMusicFade();S.musicStatus='playing';updateNowPlaying();}
+  },intv);
+}
 function doPause(){if(!S.currentAudio){showToast('⚠ Tidak ada track aktif');return;}clearMusicFade();S.currentAudio.pause();S.musicStatus='paused';updateNowPlaying();flashBtn('btnPause');}
-function doFadeOut(){if(!S.currentAudio){showToast('⚠ Tidak ada track aktif');return;}clearMusicFade();const a=S.currentAudio,sv=a.volume,steps=40,intv=(parseFloat(document.getElementById('fadeDuration').value)*1000)/steps;S.musicStatus='fadeout';updateNowPlaying();flashBtn('btnFadeOut');const fb=document.getElementById('fadeBarFill');fb.className='fade-bar-fill fading-out';let step=0;S.musicFadeIntv=setInterval(()=>{step++;a.volume=Math.max(0,sv-step*(sv/steps));fb.style.width=((step/steps)*100)+'%';if(step>=steps){a.pause();clearMusicFade();a.volume=parseFloat(document.getElementById('volumeSlider').value);S.musicStatus='paused';updateNowPlaying();}},intv);}
+function doFadeOut(){
+  if(!S.currentAudio){showToast('⚠ Tidak ada track aktif');return;}
+  clearMusicFade();
+  const a=S.currentAudio,sv=S.musicGain?S.musicGain.gain.value:S.musicVol,steps=40,intv=(parseFloat(document.getElementById('fadeDuration').value)*1000)/steps;
+  S.musicStatus='fadeout';updateNowPlaying();flashBtn('btnFadeOut');
+  const fb=document.getElementById('fadeBarFill');fb.className='fade-bar-fill fading-out';
+  let step=0;
+  S.musicFadeIntv=setInterval(()=>{
+    step++;
+    const val=Math.max(0,sv-step*(sv/steps));
+    if(S.musicGain) S.musicGain.gain.value=val;
+    fb.style.width=((step/steps)*100)+'%';
+    if(step>=steps){
+      a.pause();clearMusicFade();
+      if(S.musicGain) S.musicGain.gain.value=S.musicVol; // restore
+      S.musicStatus='paused';updateNowPlaying();
+    }
+  },intv);
+}
 
 // ════════════════════════════════════════════════════════
 //  VOICELINE
@@ -1091,8 +1190,8 @@ function doVlPlay(){
   if(S.vlAudio){S.vlAudio.pause();S.vlAudio.currentTime=0;}
   ensureAudioCtx();
   const audio=new Audio(t.url);
-  audio.volume=parseFloat(document.getElementById('volumeSlider').value);
-  connectToGraph(audio);S.vlAudio=audio;S.vlStatus='playing';t.played=true;
+  audio.volume=1.0;
+  connectToGraph(audio,'vl');S.vlAudio=audio;S.vlStatus='playing';t.played=true;
   audio.play().catch(e=>{console.warn('VL:',e);showToast('⚠ Gagal memutar: '+t.name);});
   audio.ontimeupdate=()=>{const a=S.vlAudio;if(!a)return;document.getElementById('vlProgressFill').style.width=(a.duration?(a.currentTime/a.duration)*100:0)+'%';document.getElementById('vlTimeElapsed').textContent=fmt(a.currentTime);document.getElementById('vlTimeDuration').textContent=fmt(a.duration);};
   audio.onended=()=>{S.vlStatus='done';updateVlPanel();renderVlQueue();document.getElementById('vlDot').className='indicator-dot';if(document.getElementById('vlAutoAdv').checked){const next=S.vlIndex+1;if(next<S.vlTracks.length)setTimeout(()=>setVlIndex(next),300);}};
@@ -1201,7 +1300,21 @@ document.getElementById('progressBg').addEventListener('click',e=>{const a=S.cur
 document.getElementById('vlProgressBg').addEventListener('click',e=>{const a=S.vlAudio;if(!a||!a.duration)return;const r=e.currentTarget.getBoundingClientRect();a.currentTime=((e.clientX-r.left)/r.width)*a.duration;});
 
 // Sliders
-document.getElementById('volumeSlider').addEventListener('input',function(){const v=parseFloat(this.value);document.getElementById('volDisplay').textContent=Math.round(v*100)+'%';if(S.currentAudio&&S.musicStatus==='playing')S.currentAudio.volume=v;if(S.vlAudio&&S.vlStatus==='playing')S.vlAudio.volume=v;});
+document.getElementById('volumeSlider').addEventListener('input',function(){
+  S.musicVol=parseFloat(this.value);
+  document.getElementById('volDisplay').textContent=Math.round(S.musicVol*100)+'%';
+  if(S.musicGain) S.musicGain.gain.value=S.musicVol;
+});
+document.getElementById('sfxVolSlider').addEventListener('input',function(){
+  S.sfxVol=parseFloat(this.value);
+  document.getElementById('sfxVolDisplay').textContent=Math.round(S.sfxVol*100)+'%';
+  if(S.sfxGain) S.sfxGain.gain.value=S.sfxVol;
+});
+document.getElementById('vlVolSlider').addEventListener('input',function(){
+  S.vlVol=parseFloat(this.value);
+  document.getElementById('vlVolDisplay').textContent=Math.round(S.vlVol*100)+'%';
+  if(S.vlGain) S.vlGain.gain.value=S.vlVol;
+});
 document.getElementById('fadeDuration').addEventListener('input',function(){document.getElementById('fadeDisplay').textContent=parseFloat(this.value).toFixed(1)+' s';});
 document.getElementById('loopCheck').addEventListener('change',function(){if(S.currentAudio)S.currentAudio.loop=this.checked;});
 
