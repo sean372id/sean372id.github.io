@@ -492,6 +492,9 @@
       if (e.ctrlKey && e.key === "Enter") sendQuestion();
     });
 
+    // Send button
+    sendBtn.addEventListener("click", sendQuestion);
+
     // Again button
     document.getElementById("againBtn").addEventListener("click", resetForm);
 
