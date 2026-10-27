@@ -114,7 +114,7 @@
 
     // --- INITIAL DATA & CONSTANTS ---
     const DEFAULT_PAPER_TYPES = ["A4 70gr", "A4 80gr", "F4 70gr", "A3 80gr", "Premium Photo"];
-    const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwMBt_I3iHMsvmrTlwA-re4wgYG0Zp5Hj4hJsc7dAJ10qWL2KtVeqrzaYc6X6SGFXEHbA/exec";
+    const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbygovEtLmvCSJA0NUkDhMRxjn2Pq9LJA86Vofusb8RTOTv8-CcUnaRk_a4qg8PgzGlTNg/exec";
     
     const INITIAL_TRANSACTIONS = [
       {
@@ -373,6 +373,21 @@
         sendToGAS({ action: "ADD_TRANSACTION", payload: logItem });
       };
 
+      const handleAuthorizeApp = () => {
+        const endpoint = getGasEndpoint();
+        if (!endpoint) {
+          if (!GAS_WEB_APP_URL) {
+            triggerToast("URL Web App GAS belum dikonfigurasi.", "error");
+          }
+          return;
+        }
+
+        const authorizationUrl = new URL(endpoint);
+        authorizationUrl.searchParams.set("action", "AUTHORIZE");
+        window.open(authorizationUrl.toString(), "_blank", "noopener,noreferrer");
+        triggerToast("GAS dibuka di tab baru. Selesaikan otorisasi Google, lalu kembali ke aplikasi.", "info");
+      };
+
       // --- FILTER LOGIC ---
       const filteredTransactions = useMemo(() => {
         return transactions.filter(t => {
@@ -418,6 +433,13 @@
               <p className="text-xs font-bold text-gray-700 mt-1">Sistem Kontrol Stok Kertas & Log Cetak Harian</p>
             </div>
 
+            <button
+              type="button"
+              onClick={handleAuthorizeApp}
+              className="brutal-btn bg-[#00E5FF] text-black px-4 py-2 text-xs whitespace-nowrap"
+            >
+              AUTHORIZE APP
+            </button>
           </header>
 
           {/* WARNING ALERT FOR LOW STOCK */}
